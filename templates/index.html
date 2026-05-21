@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Academy - Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0a1a;
+            --accent-cyan: #00f2ff;
+            --accent-purple: #6a11cb;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: white;
+            font-family: 'Urbanist', sans-serif;
+            overflow-x: hidden;
+            margin: 0;
+        }
+
+        /* Efeito de curvas/brilho no fundo */
+        .bg-curves {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 10% 20%, rgba(0, 242, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 80%, rgba(106, 17, 203, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        /* Menu de Navegação */
+        .navbar { background: transparent; padding: 20px 0; }
+        .nav-link { color: rgba(255, 255, 255, 0.7) !important; margin: 0 15px; font-weight: 500; transition: 0.3s; }
+        .nav-link:hover { color: var(--accent-cyan) !important; }
+        .btn-outline-cyan { border: 2px solid var(--accent-cyan); color: white; border-radius: 20px; padding: 5px 20px; font-weight: 500; text-decoration: none; transition: 0.3s; }
+        .btn-outline-cyan:hover { background: var(--accent-cyan); color: black; }
+        .btn-cyan { background: var(--accent-cyan); color: black; border-radius: 20px; padding: 7px 20px; font-weight: bold; text-decoration: none; transition: 0.3s; }
+        .btn-cyan:hover { box-shadow: 0 0 15px rgba(0, 242, 255, 0.5); }
+
+        /* Seção Principal (Hero) */
+        .hero-section { text-align: center; padding: 60px 0 20px; }
+        .hero-title { font-size: 5rem; font-weight: 800; letter-spacing: 5px; margin-bottom: 0; }
+        .hero-url { color: var(--accent-purple); letter-spacing: 10px; margin-top: -10px; font-weight: bold; font-size: 1.2rem; }
+
+        /* Círculos de Estatísticas */
+        .stat-circle {
+            width: 140px; height: 140px; border-radius: 50%;
+            border: 3px solid rgba(0, 242, 255, 0.1);
+            display: inline-flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            margin: 0 25px; position: relative;
+            background: rgba(255, 255, 255, 0.01);
+        }
+        .stat-circle::after {
+            content: ''; position: absolute; top: -3px; left: -3px; right: -3px; bottom: -3px;
+            border-radius: 50%; border: 3px solid var(--accent-cyan);
+            border-bottom-color: transparent; border-left-color: transparent;
+        }
+        .stat-number { font-size: 1.6rem; font-weight: bold; color: white; }
+        .stat-label { font-size: 0.75rem; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+        /* Card de Formulário Estilo Glassmorphism */
+        .login-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 40px;
+            margin-top: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .form-label { font-weight: 500; color: #ccc; }
+        .form-control, .form-select {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 12px;
+            padding: 12px;
+        }
+        .form-control:focus, .form-select:focus { 
+            background: rgba(255, 255, 255, 0.1); 
+            color: white; 
+            border-color: var(--accent-cyan); 
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); 
+        }
+        .form-select option { background: #121026; color: white; }
+        
+        /* Botão de Enviar com Degradê */
+        .btn-primary-ia {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            border: none; color: white; padding: 14px; border-radius: 12px; font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-primary-ia:hover {
+            opacity: 0.9;
+            box-shadow: 0 5px 20px rgba(0, 242, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-curves"></div>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-white" href="#" style="letter-spacing: 2px;">IA ACADEMY</a>
+        <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#">Cursos</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Sobre nós</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Dados do Aluno</a></li>
+            </ul>
+        </div>
+        <div class="d-none d-lg-flex">
+            <a href="#" class="btn btn-outline-cyan me-2">Cadastrar-se</a>
+            <a href="#" class="btn btn-cyan">Entrar</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="hero-section">
+        <h1 class="hero-title">IA ACADEMY</h1>
+        <p class="hero-url">WWW.IAACADEMY.COM</p>
+
+        <div class="mt-5 d-flex justify-content-center flex-wrap gap-3">
+            <div class="stat-circle"><span class="stat-number">10k+</span><span class="stat-label">Alunos</span></div>
+            <div class="stat-circle"><span class="stat-number">500+</span><span class="stat-label">Cursos</span></div>
+            <div class="stat-circle"><span class="stat-number">15k+</span><span class="stat-label">Conquistas</span></div>
+        </div>
+        
+        <button class="btn mt-5 px-4 py-2" style="border-radius: 25px; border: 2px solid var(--accent-cyan); color: var(--accent-cyan); font-weight: bold; background: transparent;">Explorar cursos</button>
+    </div>
+
+    <div class="row justify-content-center pb-5">
+        <div class="col-md-6 col-lg-5">
+            <div class="login-card">
+                <h3 class="text-center mb-4 fw-bold">Acesse sua conta</h3>
+                
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} alert-dismissible fade show bg-dark text-light border-secondary" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="senha" class="form-label">Senha</label>
+                        <input type="password" name="senha" id="senha" class="form-control" placeholder="••••••••" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="perfil" class="form-label">Tipo de Acesso</label>
+                        <select name="perfil" id="perfil" class="form-select">
+                            <option value="aluno" selected>Aluno</option>
+                            <option value="professor">Professor</option>
+                            <option value="visitante">Visitante</option>
+                        </select>
+                    </div>
+                    <button
