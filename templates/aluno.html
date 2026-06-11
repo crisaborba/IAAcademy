@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Academy - Dashboard Analytics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0a1a;
+            --card-bg: #16152a;
+            --accent-cyan: #00f2ff;
+            --accent-purple: #6a11cb;
+            --text-dim: #888899;
+        }
+        body { background-color: var(--bg-color); color: white; font-family: 'Urbanist', sans-serif; margin: 0; padding: 0; min-height: 100vh; }
+        .navbar-custom { background-color: #090816; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding: 20px 0; }
+        .navbar-custom .nav-link { color: rgba(255, 255, 255, 0.7) !important; margin: 0 15px; font-weight: 500; transition: 0.3s; text-decoration: none; }
+        .navbar-custom .nav-link:hover, .navbar-custom .nav-link.active { color: var(--accent-cyan) !important; }
+        .btn-cadastro-nav { border: 2px solid var(--accent-cyan); color: white; border-radius: 20px; padding: 5px 20px; font-weight: 500; text-decoration: none; transition: 0.3s; display: inline-block; background: transparent; }
+        .btn-cadastro-nav:hover { background: var(--accent-cyan); color: black; }
+        .btn-entrar-nav { background: var(--accent-cyan); color: black; border-radius: 20px; padding: 7px 20px; font-weight: bold; text-decoration: none; transition: 0.3s; display: inline-block; }
+        .btn-entrar-nav:hover { box-shadow: 0 0 15px rgba(0, 242, 255, 0.5); }
+        .dashboard-header { padding: 40px 0 20px; }
+        .dash-title { font-weight: 800; font-size: 2.5rem; margin: 0; }
+        .dash-subtitle { color: var(--text-dim); font-size: 1.05rem; margin-top: 5px; }
+        .kpi-card { background: var(--card-bg); border-radius: 18px; padding: 22px; border: 1px solid rgba(255, 255, 255, 0.05); display: flex; align-items: center; gap: 18px; height: 100%; }
+        .kpi-icon { width: 50px; height: 50px; border-radius: 14px; background: rgba(0, 242, 255, 0.1); color: var(--accent-cyan); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
+        .kpi-value { font-size: 1.7rem; font-weight: 800; display: block; line-height: 1.1; }
+        .kpi-label { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+        .chart-card { background: var(--card-bg); border-radius: 20px; padding: 30px; border: 1px solid rgba(255, 255, 255, 0.05); height: 100%; }
+        .chart-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 25px; display: block; letter-spacing: 0.5px; }
+        .line-chart-svg { width: 100%; height: 160px; display: block; overflow: visible; }
+        .line-path { fill: none; stroke: var(--accent-cyan); stroke-width: 4; stroke-linecap: round; }
+        .area-path { fill: url(#chartGradient); }
+        .bar-container { display: flex; align-items: flex-end; justify-content: space-between; height: 160px; padding: 10px 10px 0; }
+        .bar-item { width: 14%; background: var(--accent-purple); border-radius: 6px 6px 0 0; position: relative; transition: 0.3s; min-height: 5px; }
+        .bar-item:hover { background: var(--accent-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.4); }
+        .bar-label { position: absolute; bottom: -28px; left: 50%; transform: translateX(-50%); font-size: 0.75rem; color: var(--text-dim); font-weight: 600; }
+        .donut-chart { width: 160px; height: 160px; border-radius: 50%; background: conic-gradient(var(--accent-cyan) 0% 45%, var(--accent-purple) 45% 75%, #3c096c 75% 100%); margin: 0 auto; position: relative; box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); }
+        .donut-inner { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 110px; height: 110px; background: var(--card-bg); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.1rem; }
+        .prog-item { margin-bottom: 20px; }
+        .prog-info { display: flex; justify-content: space-between; font-size: 0.95rem; margin-bottom: 8px; font-weight: 500; }
+        .progress-dark { background: rgba(255, 255, 255, 0.05); height: 10px; border-radius: 10px; overflow: hidden; }
+        .progress-fill { background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan)); height: 100%; border-radius: 10px; }
+        .table-custom { color: white; margin: 0; }
+        .table-custom th { color: var(--text-dim); font-size: 0.85rem; text-transform: uppercase; border: none; padding-bottom: 15px; }
+        .table-custom td { border-color: rgba(255, 255, 255, 0.04); vertical-align: middle; font-size: 0.95rem; padding: 16px 10px; }
+        .status-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; margin-right: 10px; }
+        .user-avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--accent-purple); display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; margin-right: 12px; border: 1px solid rgba(255, 255, 255, 0.1); }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand navbar-custom">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-white" href="/">IA ACADEMY</a>
+        <div class="collapse navbar-collapse justify-content-center">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="/cursos">Cursos</a></li>
+                <li class="nav-item"><a class="nav-link" href="/sobre">Sobre nós</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contato">Contato</a></li>
+                <li class="nav-item"><a class="nav-link active fw-bold" href="/aluno">Dados do Aluno</a></li>
+            </ul>
+        </div>
+        <div class="d-flex">
+            <a href="/cadastro" class="btn-cadastro-nav me-2">Cadastrar-se</a>
+            <a href="/" class="btn-entrar-nav">Entrar</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container pb-5">
+    <div class="dashboard-header">
+        <h2 class="dash-title">Dados e Estatísticas</h2>
+        <p class="dash-subtitle">Painel de controle institucional.</p>
+    </div>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="kpi-card">
+                <div class="kpi-icon"><i class="bi bi-people-fill"></i></div>
+                <div><span class="kpi-label">Alunos Ativos</span><span class="kpi-value">12.345</span></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="kpi-card">
+                <div class="kpi-icon"><i class="bi bi-mortarboard-fill"></i></div>
+                <div><span class="kpi-label">Taxa Conclusão</span><span class="kpi-value">87%</span></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="kpi-card">
+                <div class="kpi-icon"><i class="bi bi-star-fill"></i></div>
+                <div><span class="kpi-label">Satisfação</span><span class="kpi-value">4.8 / 5</span></div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="kpi-card">
+                <div class="kpi-icon"><i class="bi bi-journal-code"></i></div>
+                <div><span class="kpi-label">Cursos Ativos</span><span class="kpi-value">24</span></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-7">
+            <div class="chart-card">
+                <span class="chart-title">Evolução Trimestral de Matrículas</span>
+                <svg class="line-chart-svg" viewBox="0 0 500 150">
+                    <defs>
+                        <linearGradient id="chartGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stop-color="var(--accent-cyan)" stop-opacity="0.25"/>
+                            <stop offset="100%" stop-color="var(--accent-cyan)" stop-opacity="0.0"/>
+                        </linearGradient>
+                    </defs>
+                    <path class="area-path" d="M0,150 L0,110 C60,115 110,85 160,95 C220,105 260,45 320,55 C380,65 430,25 500,15 L500,150 Z"></path>
+                    <path class="line-path" d="M0,110 C60,115 110,85 160,95 C220,105 260,45 320,55 C380,65 430,25 500,15"></path>
+                </svg>
+            </div>
+        </div>
+        
+        <div class="col-md-5">
+            <div class="chart-card">
+                <span class="chart-title">Acessos por Especialidade</span>
+                <div class="bar-container">
+                    <div class="bar-item" style="height: 92%"><span class="bar-label">Python</span></div>
+                    <div class="bar-item" style="height: 76%"><span class="bar-label">M.L.</span></div>
+                    <div class="bar-item" style="height: 85%"><span class="bar-label">LLMs</span></div>
+                    <div class="bar-item" style="height: 58%"><span class="bar-label">Visão</span></div>
+                    <div class="bar-item" style="height: 40%"><span class="bar-label">NLP</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="chart-card text-center">
+                <span class="chart-title text-start">Segmentação por Idade</span>
+                <div class="donut-chart"><div class="donut-inner">18-34 Anos</div></div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="chart-card">
+                <span class="chart-title">Métricas de Engajamento Global</span>
+                <div class="prog-item">
+                    <div class="prog-info"><span>Exercícios Práticos</span><span>92%</span></div>
+                    <div class="progress-dark"><div class="progress-fill" style="width: 92%"></div></div>
+                </div>
+                <div class="prog-item">
+                    <div class="prog-info"><span>Média do IQ Index</span><span>78%</span></div>
+                    <div class="progress-dark"><div class="progress-fill" style="width: 78%"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

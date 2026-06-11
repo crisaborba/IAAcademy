@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA Academy - Sobre Nós</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0a1a;
+            --accent-cyan: #00f2ff;
+            --accent-purple: #6a11cb;
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --border-glow: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: white;
+            font-family: 'Urbanist', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* Menu de Navegação Padronizado */
+        .navbar-custom {
+            background-color: #090816;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px 0;
+        }
+        .navbar-custom .nav-link { 
+            color: rgba(255, 255, 255, 0.7) !important; 
+            margin: 0 15px; 
+            font-weight: 500; 
+            transition: 0.3s; 
+            text-decoration: none; 
+        }
+        .navbar-custom .nav-link:hover, .navbar-custom .nav-link.active { 
+            color: var(--accent-cyan) !important; 
+        }
+        .btn-cadastro-nav { 
+            border: 2px solid var(--accent-cyan); 
+            color: white; 
+            border-radius: 20px; 
+            padding: 5px 20px; 
+            font-weight: 500; 
+            text-decoration: none; 
+            transition: 0.3s; 
+            display: inline-block; 
+            background: transparent;
+        }
+        .btn-cadastro-nav:hover { 
+            background: var(--accent-cyan); 
+            color: black; 
+        }
+        .btn-entrar-nav { 
+            background: var(--accent-cyan); 
+            color: black; 
+            border-radius: 20px; 
+            padding: 7px 20px; 
+            font-weight: bold; 
+            text-decoration: none; 
+            transition: 0.3s; 
+            display: inline-block; 
+        }
+        .btn-entrar-nav:hover { 
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.5); 
+        }
+
+        /* Seção Título Principal */
+        .header-section {
+            text-align: center;
+            padding: 60px 0 30px;
+        }
+        .header-title {
+            font-size: 3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        .header-subtitle {
+            color: #aaaab8;
+            font-size: 1.1rem;
+            max-width: 650px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Cards Institucionais (Missão, Visão, Valores) */
+        .info-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 35px 25px;
+            text-align: center;
+            height: 100%;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 242, 255, 0.1);
+            border-color: rgba(0, 242, 255, 0.2);
+        }
+        .card-icon {
+            font-size: 2.2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .info-card h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .info-card p {
+            color: #aaaab8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+
+        /* Seção Equipe */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 50px;
+        }
+        .team-member {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .avatar-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #00f2ff 0%, #6a11cb 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin: 0 auto 20px;
+            box-shadow: 0 5px 15px rgba(0, 242, 255, 0.2);
+        }
+        .member-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .member-role {
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Container de Números/Métricas */
+        .metrics-container {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glow);
+            border-radius: 20px;
+            padding: 40px 20px;
+            margin-top: 30px;
+        }
+        .metric-item {
+            text-align: center;
+        }
+        .metric-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 5px;
+        }
+        .metric-label {
+            color: #888899;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand navbar-custom">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-white" href="/" style="letter-spacing: 2px;">IA ACADEMY</a>
+        
+        <div class="collapse navbar-collapse justify-content-center">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link text-white fw-bold" href="/cursos">Cursos</a></li>
+                <li class="nav-item"><a class="nav-link active" href="/sobre">Sobre nós</a></li>
+                <li class="nav-item"><a class="nav-link" href="/contato">Contato</a></li>
+                <li class="nav-item"><a class="nav-link" href="/aluno">Dados do Aluno</a></li>
+            </ul>
+        </div>
+        
+        <div class="d-flex">
+            <a href="/cadastro" class="btn-cadastro-nav me-2">Cadastrar-se</a>
+            <a href="/" class="btn-entrar-nav">Entrar</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container pb-5">
+    <div class="header-section">
+        <h1 class="header-title">Sobre a IA Academy</h1>
+        <p class="header-subtitle">
+            Somos uma plataforma educacional dedicada a formar os melhores profissionais em Inteligência Artificial. 
+            Nossa missão é tornar o conhecimento em IA acessível, prático e transformador para todos que desejam se destacar nesta área.
+        </p>
+    </div>
+
+    <div class="row g-4 justify-content-center mb-5 pb-4">
+        <div class="col-md-4">
+            <div class="info-card">
+                <div class="card-icon"><i class="bi bi-target"></i></div>
+                <h4>Missão</h4>
+                <p>Democratizar o acesso à educação em Inteligência Artificial e formar profissionais de excelência.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="info-card">
+                <div class="card-icon"><i class="bi bi-eye"></i></div>
+                <h4>Visão</h4>
+                <p>Ser a principal referência em educação de IA na América Latina até 2030.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="info-card">
+                <div class="card-icon"><i class="bi bi-award"></i></div>
+                <h4>Valores</h4>
+                <p>Excelência, inovação, acessibilidade e compromisso com o aprendizado contínuo.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mb-5">
+        <h3 class="section-title">Nossa Equipe</h3>
+        <div class="row g-4 justify-content-center">
+            <div class="col-6 col-md-3">
+                <div class="team-member">
+                    <div class="avatar-circle">AS</div>
+                    <div class="member-name">Dra. Ana Silva</div>
+                    <div class="member-role">Head de IA</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="team-member">
+                    <div class="avatar-circle">CS</div>
+                    <div class="member-name">Dr. Carlos Santos</div>
+                    <div class="member-role">Diretor de Pesquisa</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="team-member">
+                    <div class="avatar-circle">ML</div>
+                    <div class="member-name">Prof. Maria Lima</div>
+                    <div class="member-role">Coordenadora Acadêmica</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="team-member">
+                    <div class="avatar-circle">JO</div>
+                    <div class="member-name">Dr. João Oliveira</div>
+                    <div class="member-role">Especialista em ML</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="metrics-container mb-4">
+        <h4 class="text-center mb-4 fw-bold" style="letter-spacing: 1px;">Números que Impressionam</h4>
+        <div class="row g-4 justify-content-center">
+            <div class="col-6 col-md-3">
+                <div class="metric-item">
+                    <div class="metric-number">12.345</div>
+                    <div class="metric-label">Alunos</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="metric-item">
+                    <div class="metric-number">24</div>
+                    <div class="metric-label">Cursos</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="metric-item">
+                    <div class="metric-number">87%</div>
+                    <div class="metric-label">Taxa de Conclusão</div>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="metric-item">
+                    <div class="metric-number">4.8/5</div>
+                    <div class="metric-label">Satisfação</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
