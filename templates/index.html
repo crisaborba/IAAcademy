@@ -33,11 +33,11 @@
 
         /* Menu de Navegação */
         .navbar { background: transparent; padding: 20px 0; }
-        .nav-link { color: rgba(255, 255, 255, 0.7) !important; margin: 0 15px; font-weight: 500; transition: 0.3s; }
+        .nav-link { color: rgba(255, 255, 255, 0.7) !important; margin: 0 15px; font-weight: 500; transition: 0.3s; text-decoration: none; }
         .nav-link:hover { color: var(--accent-cyan) !important; }
-        .btn-outline-cyan { border: 2px solid var(--accent-cyan); color: white; border-radius: 20px; padding: 5px 20px; font-weight: 500; text-decoration: none; transition: 0.3s; }
+        .btn-outline-cyan { border: 2px solid var(--accent-cyan); color: white; border-radius: 20px; padding: 5px 20px; font-weight: 500; text-decoration: none; transition: 0.3s; display: inline-block; }
         .btn-outline-cyan:hover { background: var(--accent-cyan); color: black; }
-        .btn-cyan { background: var(--accent-cyan); color: black; border-radius: 20px; padding: 7px 20px; font-weight: bold; text-decoration: none; transition: 0.3s; }
+        .btn-cyan { background: var(--accent-cyan); color: black; border-radius: 20px; padding: 7px 20px; font-weight: bold; text-decoration: none; transition: 0.3s; display: inline-block; }
         .btn-cyan:hover { box-shadow: 0 0 15px rgba(0, 242, 255, 0.5); }
 
         /* Seção Principal (Hero) */
@@ -107,21 +107,21 @@
 
 <nav class="navbar navbar-expand-lg">
     <div class="container">
-        <a class="navbar-brand fw-bold text-white" href="#" style="letter-spacing: 2px;">IA ACADEMY</a>
+        <a class="navbar-brand fw-bold text-white" href="/" style="letter-spacing: 2px;">IA ACADEMY</a>
         <button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#">Cursos</a></li>
+                <li class="nav-item"><a class="nav-link text-white fw-bold" href="/cursos">Cursos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Sobre nós</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Contato</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">Dados do Aluno</a></li>
             </ul>
         </div>
         <div class="d-none d-lg-flex">
-            <a href="#" class="btn btn-outline-cyan me-2">Cadastrar-se</a>
-            <a href="#" class="btn btn-cyan">Entrar</a>
+            <a href="/cadastro" class="btn btn-outline-cyan me-2">Cadastrar-se</a>
+            <a href="/" class="btn btn-cyan">Entrar</a>
         </div>
     </div>
 </nav>
@@ -137,7 +137,7 @@
             <div class="stat-circle"><span class="stat-number">15k+</span><span class="stat-label">Conquistas</span></div>
         </div>
         
-        <button class="btn mt-5 px-4 py-2" style="border-radius: 25px; border: 2px solid var(--accent-cyan); color: var(--accent-cyan); font-weight: bold; background: transparent;">Explorar cursos</button>
+        <a href="/cursos" class="btn mt-5 px-4 py-2" style="border-radius: 25px; border: 2px solid var(--accent-cyan); color: var(--accent-cyan); font-weight: bold; background: transparent; text-decoration: none; display: inline-block;">Explorar cursos</a>
     </div>
 
     <div class="row justify-content-center pb-5">
@@ -173,25 +173,16 @@
                             <option value="visitante">Visitante</option>
                         </select>
                     </div>
-                    <button></button>
-                        <div class="mb-4">
-                            <label for="perfil" class="form-label">Tipo de Acesso</label>
-                            <select name="perfil" id="perfil" class="form-select">
-                                <option value="aluno" selected>Aluno</option>
-                                <option value="professor">Professor</option>
-                                <option value="visitante">Visitante</option>
-                            </select>
-                        </div>
-                        
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary-ia w-100">Entrar / Cadastrar Agora</button>
-                        </div>
-    
-                    </form> </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary-ia w-100">Entrar / Cadastrar Agora</button>
+                    </div>
+                </form> 
             </div>
         </div>
     </div>
+</div>
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-    </html>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
